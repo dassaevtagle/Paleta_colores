@@ -11,7 +11,6 @@
 </head>
 <style>
     body{
-        font-size: 1.7rem;
         background-color: #FAFAFA;
     }
     /**
@@ -60,45 +59,84 @@
         width: 100%;
         height: 20px;
     }
-
+    /* ---------HOME CARDS----------- */
     .home_card{
-        width: 95%;
+        width: 100%;
         height: 100px;
         color: #FFFFFF;
     }
     .home_card_header{
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
         height: 50px;
         width: 100%;
         margin-left: 0 !important;
         font-weight: 700!important;
     }
     .home_card_avatar{
-        width: 25%;
-        max-width: 25%;
+        width: 20%;
+        max-width: 20%;
         border-top-left-radius: .25rem;
     }
     .home_card_title{
-        width: 75%;
-        max-width: 75%;
+        width: 80%;
+        max-width: 80%;
         border-top-right-radius: .25rem;
     }
     .home_card_body{
         height: 100px;
     }
+
+
+    /* -------PAGINATION------------ */
+    .pagination {
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .pagination > a > i {
+        font-size: 0.8rem;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 5px 12px;
+        text-decoration: none;
+        margin: 0 4px;
+    
+    }
+
+    .pagination a.active {
+        background-color: #28a9e2;
+        color: white;
+    }
+
+    .pagination a.disabled {
+        opacity: 0.6;
+    }
+
+    .pagination a:not(.active) {
+        background-color: #ddd;
+        color: rgba(0, 0, 0, 0.87);
+        background-color: #b7b7b7;
+    }
+
     .btn{
-        padding: 1rem .75rem !important;
         background-color: transparent;
         color: #616161;
         border: 1.8px solid !important;
-        font-size: 1.07rem;
+        font-size: 0.8rem;
+        height: 80%;
     }
     i{
         font-size: 1.8rem;
         color: #616161;
     }
     .status{
-        font-size: 18px; font-family: 'Roboto', sans-serif; font-weight: 700 !important;
+        font-size: 15px; 
+        font-family: 'Roboto', sans-serif; 
+        font-weight: 700 !important;
     }
 </style>
 <body class="container mt-4">
@@ -164,73 +202,75 @@
         </div>
         <div class="my-2 text-center">
             <h1 class="my-5" id="home-cards">Home cards <i class="fas fa-question-circle"></i></h1>
-            <table class="table mt-4" style="font-size: 1.4rem">
-                <thead>
-                <tr>
-                    <th scope="col">Home card 1</th>
-                    <th scope="col">Home card 2</th>
-                    <th scope="col">Home card 3</th>
-                    <th scope="col">Home card 4</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        bg_home_card_1_avatar
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_1_avatar"></div>
-                    </td>
-                    <td> 
-                        bg_home_card_2_avatar
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_2_avatar"></div>
-                    </td>
-                    <td>
-                        bg_home_card_3_avatar
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_3_avatar"></div>
-                    </td>
-                    <td>
-                        bg_home_card_4_avatar
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_4_avatar"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        bg_home_card_1
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_1"></div>
-                    </td>
-                    <td>
-                        bg_home_card_2
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_2"></div>
-                    </td>
-                    <td>
-                        bg_home_card_3
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_3"></div>
-                    </td>
-                    <td>
-                        bg_home_card_4
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_4"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>bg_home_card_1_title
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_1_title"></div></td>
-                    <td>
-                        bg_home_card_2_title
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_2_title"></div>
-                    </td>
-                    <td>
-                        bg_home_card_3_title
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_3_title"></div>
-                    </td>
-                    <td>
-                        bg_home_card_4_title
-                        <div class="color-rectangle rounded-sm" id="bg_home_card_4_title"></div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table mt-4">
+                    <thead>
+                    <tr>
+                        <th scope="col">Home card 1</th>
+                        <th scope="col">Home card 2</th>
+                        <th scope="col">Home card 3</th>
+                        <th scope="col">Home card 4</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            bg_home_card_1_avatar
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_1_avatar"></div>
+                        </td>
+                        <td> 
+                            bg_home_card_2_avatar
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_2_avatar"></div>
+                        </td>
+                        <td>
+                            bg_home_card_3_avatar
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_3_avatar"></div>
+                        </td>
+                        <td>
+                            bg_home_card_4_avatar
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_4_avatar"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            bg_home_card_1
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_1"></div>
+                        </td>
+                        <td>
+                            bg_home_card_2
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_2"></div>
+                        </td>
+                        <td>
+                            bg_home_card_3
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_3"></div>
+                        </td>
+                        <td>
+                            bg_home_card_4
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_4"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>bg_home_card_1_title
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_1_title"></div></td>
+                        <td>
+                            bg_home_card_2_title
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_2_title"></div>
+                        </td>
+                        <td>
+                            bg_home_card_3_title
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_3_title"></div>
+                        </td>
+                        <td>
+                            bg_home_card_4_title
+                            <div class="color-rectangle rounded-sm" id="bg_home_card_4_title"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-8 offset-2 offset-lg-0 col-lg-3 mt-4">
                         <div class="rounded-top home_card bg_home_card_1_title">
                             <div class="row home_card_header">
                                 <div class="home_card_avatar bg_home_card_1_avatar px-3 py-1">
@@ -244,7 +284,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-8 offset-2 offset-lg-0 col-lg-3 mt-4">
                         <div class="rounded-top home_card bg_home_card_2_title">
                             <div class="row home_card_header">
                                 <div class="home_card_avatar bg_home_card_2_avatar px-3 py-1">
@@ -258,7 +298,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-8 offset-2 offset-lg-0 col-lg-3 mt-4">
                         <div class="rounded-top home_card bg_home_card_3_title">
                             <div class="row home_card_header">
                                 <div class="home_card_avatar bg_home_card_3_avatar px-3 py-1">
@@ -272,7 +312,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-8 offset-2 offset-lg-0 col-lg-3 mt-4">
                         <div class="rounded-top home_card bg_home_card_4_title">
                             <div class="row home_card_header">
                                 <div class="home_card_avatar bg_home_card_4_avatar px-3 py-1">
@@ -311,6 +351,39 @@
                     status_finished
                     <div id="status_finished"></div>
                     <span class="status"> Terminado </span>
+                </div>
+            </div>
+        </div>
+        <div class="my-5 text-center">
+            <h1 class="my-4" id="pagination_buttons">Pagination <i class="fas fa-question-circle"></i></h1>
+            <div class="col-10 offset-1">
+                <div class="pagination">
+                    <a class="disabled" ><i class="fas fa-chevron-left"></i></a>
+                    <a class="active" >1</a>
+                    <a>2</a>
+                    <a>3</a>
+                    <a>4</a>
+                    <a>5</a>
+                    <a>6</a>
+                    <a><i class="fas fa-chevron-right"></i></a>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-4 offset-4 col-lg-3 offset-lg-0">
+                    font_pagination
+                    <div id="color-rectangle font_pagination"></div>
+                </div>
+                <div class="col-4 offset-4 col-lg-3 offset-lg-0">
+                    font_pagination_active
+                    <div id="color-rectangle font_pagination_active"></div>
+                </div>
+                <div class="col-4 offset-4 col-lg-3 offset-lg-0">
+                    bg_pagination
+                    <div id="color-rectangle bg_pagination"></div>
+                </div>
+                <div class="col-4 offset-4 col-lg-3 offset-lg-0">
+                    bg_pagination_active
+                    <div id="color-rectangle bg_pagination_active"></div>
                 </div>
             </div>
         </div>
@@ -372,9 +445,9 @@
                 </div>
             </div>
         </div>
-        <div class="my-2 text-center">
+        <div class="table-responsive my-2 text-center">
             <h1 class="my-5">Portfolio steps</h1>
-            <table class="table mt-4" style="font-size: 1.4rem">
+            <table class="table mt-4">
                 <tbody>
                 <tr>
                     <td>
@@ -472,10 +545,16 @@ const paleta = {
         bg_home_card_4_avatar: '#72bc41',
         bg_home_card_4_title: '#a1cf62',
 
-        status_active: "#FFA726",
-        status_process: "#42A5F5",
+        status_active: '#f15a25',
+        status_process: '#239cd3',
         status_canceled: "#D81B60",
-        status_finished:  "#4CAF50",
+        status_finished:  '#72bc41',
+
+         //PAGINACIÓN
+        font_pagination: '#000000',
+        font_pagination_active: '#FFFFFF',
+        bg_pagination: '#b7b7b7',
+        bg_pagination_active: '#28a9e2',
 
         //avatar_letra_sub: '#236faa', //?
 
