@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@r-tek/colr_pickr@2.0.0/build/colr_pickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Paleta de colores</title>
+</head>
+<style>
+    body{
+        font-size: 1.7rem;
+        background-color: #FAFAFA;
+    }
+    /**
+    Ajustar el botón de Colr Pickr para agregar un color
+    */
+    #color_picker #custom_colors_add {
+        margin: -6px 0 !important;
+    }
+    .color-rectangle{
+        width: 100%;
+        height:75px;
+        margin: auto;
+    }
+    #primary{
+        height:100px !important;
+    }
+    #secondary{
+        height:100px !important;
+    }
+    #accent{
+        height:100px !important;
+    }
+    #bg_header{
+        height:100px !important;
+    }
+    #bg_main{
+        height:100px !important;
+    }
+    #bg_main_header{
+        height:100px !important;
+    }
+    
+    #status_active{
+        width: 100%;
+        height: 20px;
+    }
+    #status_process{
+        width: 100%;
+        height: 20px;
+    }
+    #status_canceled{
+        width: 100%;
+        height: 20px;
+    }
+    #status_finished{
+        width: 100%;
+        height: 20px;
+    }
+
+    .home_card{
+        width: 95%;
+        height: 100px;
+        color: #FFFFFF;
+    }
+    .home_card_header{
+        font-size: 1.1rem !important;
+        height: 50px;
+        width: 100%;
+        margin-left: 0 !important;
+        font-weight: 700!important;
+    }
+    .home_card_avatar{
+        width: 25%;
+        max-width: 25%;
+        border-top-left-radius: .25rem;
+    }
+    .home_card_title{
+        width: 75%;
+        max-width: 75%;
+        border-top-right-radius: .25rem;
+    }
+    .home_card_body{
+        height: 100px;
+    }
+    .btn{
+        padding: 1rem .75rem !important;
+        background-color: transparent;
+        color: #616161;
+        border: 1.8px solid !important;
+        font-size: 1.07rem;
+    }
+    i{
+        font-size: 1.8rem;
+        color: #616161;
+    }
+    .status{
+        font-size: 18px; font-family: 'Roboto', sans-serif; font-weight: 700 !important;
+    }
+</style>
+<body class="container mt-4">
+    <div class="my-3">
+        <div class="row mb-4">
+            <h1 class="col-5">Paleta de colores</h1>
+            <a class="btn btn-secondary col-2 offset-2" href="https://vuetifyjs.com/en/styles/colors/#material-colors" target="_blank">Ejemplo de colores</a>
+            <a class="btn btn-secondary col-2 ml-5" id="exportarJSON">Exportar JSON</a>
+        </div>
+        <div class="d-none" id="JSON-container">
+            <pre id="JSON" style="font-size: 65%; color: #e83e8c;">
+            </pre>
+            
+        </div>
+        <div class="text-center my-4">
+            <h1 class="my-5">Colores principales</h1>
+            <div class="row text-center">
+                <div class="col-4">
+                    primary
+                    <div class="color-rectangle rounded-sm" id="primary"></div>
+                </div>
+                <div class="col-4">
+                    secondary
+                    <div class="color-rectangle rounded-sm" id="secondary"></div>
+                </div>
+                <div class="col-4">
+                    accent
+                    <div class="color-rectangle rounded-sm" id="accent"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row text-center mt-4">
+                <div class="col-4">
+                    bg_header
+                    <div class="color-rectangle rounded-sm" id="bg_header"></div>
+                </div>
+                <div class="col-4">
+                    bg_main
+                    <div class="color-rectangle rounded-sm" id="bg_main"></div>
+                </div>
+                <div class="col-4">
+                    bg_main_header
+                    <div class="color-rectangle rounded-sm" id="bg_main_header"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row text-center mt-4">
+                <div class="col-4">
+                    btn_primary_border
+                    <div class="color-rectangle rounded-sm" id="btn_primary_border"></div>
+                </div>
+                <div class="col-4">
+                    btn_success_border
+                    <div class="color-rectangle rounded-sm" id="btn_success_border"></div>
+                </div>
+                <div class="col-4">
+                    btn_pagination
+                    <div class="color-rectangle rounded-sm" id="btn_pagination"></div>
+                </div>
+            </div>
+        </div>
+        <div class="my-2 text-center">
+            <h1 class="my-5" id="home-cards">Home cards <i class="fas fa-question-circle"></i></h1>
+            <table class="table mt-4" style="font-size: 1.4rem">
+                <thead>
+                <tr>
+                    <th scope="col">Home card 1</th>
+                    <th scope="col">Home card 2</th>
+                    <th scope="col">Home card 3</th>
+                    <th scope="col">Home card 4</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        bg_home_card_1_avatar
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_1_avatar"></div>
+                    </td>
+                    <td> 
+                        bg_home_card_2_avatar
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_2_avatar"></div>
+                    </td>
+                    <td>
+                        bg_home_card_3_avatar
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_3_avatar"></div>
+                    </td>
+                    <td>
+                        bg_home_card_4_avatar
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_4_avatar"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        bg_home_card_1
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_1"></div>
+                    </td>
+                    <td>
+                        bg_home_card_2
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_2"></div>
+                    </td>
+                    <td>
+                        bg_home_card_3
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_3"></div>
+                    </td>
+                    <td>
+                        bg_home_card_4
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_4"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>bg_home_card_1_title
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_1_title"></div></td>
+                    <td>
+                        bg_home_card_2_title
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_2_title"></div>
+                    </td>
+                    <td>
+                        bg_home_card_3_title
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_3_title"></div>
+                    </td>
+                    <td>
+                        bg_home_card_4_title
+                        <div class="color-rectangle rounded-sm" id="bg_home_card_4_title"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="rounded-top home_card bg_home_card_1_title">
+                            <div class="row home_card_header">
+                                <div class="home_card_avatar bg_home_card_1_avatar px-3 py-1">
+                                    1
+                                </div>
+                                 <div class="home_card_title py-2 bg_home_card_1">
+                                     PENDIENTES
+                                </div> 
+                            </div>
+                            <div class="row home_card_body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="rounded-top home_card bg_home_card_2_title">
+                            <div class="row home_card_header">
+                                <div class="home_card_avatar bg_home_card_2_avatar px-3 py-1">
+                                    1
+                                </div>
+                                 <div class="home_card_title py-2 bg_home_card_2">
+                                     EN PROCESO
+                                </div> 
+                            </div>
+                            <div class="row home_card_body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="rounded-top home_card bg_home_card_3_title">
+                            <div class="row home_card_header">
+                                <div class="home_card_avatar bg_home_card_3_avatar px-3 py-1">
+                                    1
+                                </div>
+                                 <div class="home_card_title py-2 bg_home_card_3">
+                                     CANCELADOS
+                                </div> 
+                            </div>
+                            <div class="row home_card_body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="rounded-top home_card bg_home_card_4_title">
+                            <div class="row home_card_header">
+                                <div class="home_card_avatar bg_home_card_4_avatar px-3 py-1">
+                                    1
+                                </div>
+                                 <div class="home_card_title py-2 bg_home_card_4">
+                                     FINALIZADOS
+                                </div> 
+                            </div>
+                            <div class="row home_card_body">
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-5 text-center">
+            <h1 class="my-4" id="text-status">Text status <i class="fas fa-question-circle"></i></h1>
+            <div class="row">
+                <div class="col">
+                    status_active
+                    <div id="status_active"></div>
+                    <span class="status"> Pendiente </span>
+                </div>
+                <div class="col" >
+                    status_process
+                    <div id="status_process"></div>
+                    <span class="status"> En proceso </span>
+                </div>
+                <div class="col" >
+                    status_canceled
+                    <div id="status_canceled"></div>
+                    <span class="status"> Cancelado </span>
+                </div>
+                <div class="col" >
+                    status_finished
+                    <div id="status_finished"></div>
+                    <span class="status"> Terminado </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row text-center mt-4">
+                <div class="col-4">
+                    header_categories
+                    <div class="color-rectangle rounded-sm" id="header_categories"></div>
+                </div>
+                <div class="col-4">
+                    category_menu_unselected
+                    <div class="color-rectangle rounded-sm" id="category_menu_unselected"></div>
+                </div>
+                <div class="col-4">
+                    tramite_ico_svg
+                    <div class="color-rectangle rounded-sm" id="tramite_ico_svg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <h1 class="my-5">Tabs requisitos</h1>
+            <div class="row mt-4">
+                <div class="col-6">
+                    requisitos_tab
+                    <div class="color-rectangle rounded-sm" id="requisitos_tab"></div>
+                </div>
+                <div class="col-6">
+                    requisitos_tab_active
+                    <div class="color-rectangle rounded-sm" id="requisitos_tab_active"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <h1 class="my-5">Portfolio item action</h1>
+            <div class="row mt-4">
+                <div class="col-4">
+                    to_pending
+                    <div class="color-rectangle rounded-sm" id="to_pending"></div>
+                </div>
+                <div class="col-4">
+                    to_delete
+                    <div class="color-rectangle rounded-sm" id="to_delete"></div>
+                </div>
+                <div class="col-4">
+                    to_portfolio
+                    <div class="color-rectangle rounded-sm" id="to_portfolio"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="row mt-4">
+                <div class="col-6">
+                    bg_transaction_concepts
+                    <div class="color-rectangle rounded-sm" id="bg_transaction_concepts"></div>
+                </div>
+                <div class="col-6">
+                    bg_no_procedures
+                    <div class="color-rectangle rounded-sm" id="bg_no_procedures"></div>
+                </div>
+            </div>
+        </div>
+        <div class="my-2 text-center">
+            <h1 class="my-5">Portfolio steps</h1>
+            <table class="table mt-4" style="font-size: 1.4rem">
+                <tbody>
+                <tr>
+                    <td>
+                        bg_v_stepper
+                    </td>
+                    <td>
+                        bg_v_stepper_active
+                    </td>
+                    <td>
+                        font_v_stepper_complete
+                    </td>
+                    <td>
+                        font_v_stepper_inactive
+                    </td>
+                    <td>
+                        font_v_stepper_active
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="color-rectangle rounded-sm" id="bg_v_stepper"></div>
+                    </td>
+                    <td> 
+                        <div class="color-rectangle rounded-sm" id="bg_v_stepper_active"></div>
+                    </td>
+                    <td>
+                        <div class="color-rectangle rounded-sm" id="font_v_stepper_complete"></div>
+                    </td>
+                    <td>
+                        <div class="color-rectangle rounded-sm" id="font_v_stepper_inactive"></div>
+                    </td>
+                    <td>
+                        <div class="color-rectangle rounded-sm" id="font_v_stepper_active"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div class="row text-center mt-4">
+                <div class="col-6 offset-3">
+                    btn_download_invoice
+                    <div class="color-rectangle rounded-sm" id="btn_download_invoice"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row text-center mt-4">
+                <div class="col-6">
+                    bg_login
+                    <div class="color-rectangle rounded-sm" id="bg_login"></div>
+                </div>
+                <div class="col-6">
+                    bg_login_fieldset_border
+                    <div class="color-rectangle rounded-sm" id="bg_login_fieldset_border"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@r-tek/colr_pickr@2.0.0/build/colr_pickr.min.js" type="text/javascript"></script>
+<script>
+const paleta = {
+        primary: '#194a7f',
+        secondary: '#757575',
+        accent: '#29abe2',
+
+        bg_header: "#F48FB1", //?   
+        bg_main: "#eee",
+        bg_main_header: "#eee",
+
+        //BOTONES
+        btn_primary_border: '#236faa',
+        btn_success_border: '#2aa8dd',
+
+        //PAGINACIÓN
+        btn_pagination: '#b7b7b7',
+
+        //##### DASHBOARD TOP CARDS #####
+        bg_home_card_1: '#f6931c',
+        bg_home_card_1_avatar: '#f5881f',
+        bg_home_card_1_title: '#f5a448',
+
+        bg_home_card_2: '#28a9e2',
+        bg_home_card_2_avatar: '#239cd3',
+        bg_home_card_2_title: '#50b7e4',
+
+        bg_home_card_3: '#f0605f',
+        bg_home_card_3_avatar: '#f34d4f',
+        bg_home_card_3_title: '#ef7b7c',
+
+        bg_home_card_4: '#8dc73f',
+        bg_home_card_4_avatar: '#72bc41',
+        bg_home_card_4_title: '#a1cf62',
+
+        status_active: "#FFA726",
+        status_process: "#42A5F5",
+        status_canceled: "#D81B60",
+        status_finished:  "#4CAF50",
+
+        //avatar_letra_sub: '#236faa', //?
+
+        //PROCESSES
+        header_categories: "#0D47A1", //?
+        category_menu_unselected: "#b3b3b3",
+        tramite_ico_svg: "#555",
+
+        requisitos_tab: '#ccc',
+        requisitos_tab_active: "#b4d0e5",
+
+        //PORTFOLIO ITEM ACTION
+        to_pending: '#FFA726',
+        to_delete: '#EF5350',
+        to_portfolio: '#194a7f',
+        bg_transaction_concepts: '#E0E0E0',
+        bg_no_procedures: '#BBDEFB',
+
+        //PORTFOLIO STEPS
+        bg_v_stepper: '#ced9df',
+        bg_v_stepper_active: "#fff",
+        font_v_stepper_complete: '#0064A8',
+        font_v_stepper_inactive: '#666',
+        font_v_stepper_active: '#2f3a4e',
+
+        btn_download_invoice: '#FFB74D',
+
+        //LOGIN
+        bg_login: '#fff',
+        bg_login_fieldset_border: '#ccc',
+    }
+
+
+    /**
+     * Tooltips de ayuda
+     * 
+    */
+   $('#home-cards').tooltip({title: "Cards que se muestran en el dashboard para listar cuántos trámites están en determinado proceso (Pediente, En proceso, Cancelado, Finalizado) "})
+    $('#text-status').tooltip({ title: "Texto del status del trámite"});
+
+    /**
+     * Iteración sobre objeto de la paleta de colores para asignar colores e inicializar ColorPicker sobre cada elemento html
+    */
+
+    for (const claseColor in paleta) {
+        var hex = paleta[claseColor];
+
+         /**
+         * Create a new ColorPicker instance, which takes 2 parameters
+         *
+         * Parameter 1 [HTMLElement]: the button you want to launch the editor
+         * Parameter 2 [String] (Optional): A color
+         */
+
+        const button = document.getElementById(claseColor);
+        let picker = new ColorPicker(button, hex);
+        /**
+         * What do you want to do after you have chosen the color?
+         *
+         * You can specify this in an EventListener, assigned to your button
+         */
+
+         if(claseColor.includes("bg_home_card")) {
+
+            $(`.${claseColor}`).css("background-color", hex);
+
+            button.addEventListener("colorChange", function (event) {
+                $(`.${claseColor}`).css("background-color", event.detail.color.hexa);
+            });
+        }
+
+        if(['status_active', 'status_process', 'status_canceled', 'status_finished'].indexOf(claseColor) != -1) {
+
+            $(`#${claseColor}`).parent().css("color", hex);
+
+            button.addEventListener("colorChange", function (event) {
+                $(`#${claseColor}`).parent().css("color", event.detail.color.hexa);
+            });
+        }
+
+        //button.addEventListener("colorChange", function (event) {
+            // This will give you the color you selected
+          //  const color = event.detail.color.hexa;
+
+        //});
+    } 
+
+
+    $("#exportarJSON").on('click', () => {
+        const newPaleta = {};
+        for (const claseColor in paleta) {
+            
+            var newColor = $(`#${claseColor}`).css('background-color'); 
+            
+            var hexadecimalColor;
+            hexadecimalColor = newColor.includes("rgba") ? rgba2hex(newColor) : rgb2hex(newColor); 
+
+            console.log(newColor)
+            console.log(hexadecimalColor)
+
+            newPaleta[claseColor] = hexadecimalColor; 
+        }
+        $('#JSON-container').removeClass("d-none");
+        $('#JSON').html(JSON.stringify(newPaleta, undefined, 2));
+        console.log(newPaleta)
+    });
+
+    function rgba2hex(orig) {
+      var a, isPercent,
+        rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
+        alpha = (rgb && rgb[4] || "").trim(),
+        hex = rgb ? 
+        (rgb[1] | 1 << 8).toString(16).slice(1) +
+        (rgb[2] | 1 << 8).toString(16).slice(1) +
+        (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
+          if (alpha !== "") {
+            a = alpha;
+          } else {
+            a = 01;
+          }
+
+          a = Math.round(a * 100) / 100;
+            var alpha = Math.round(a * 255);
+            var hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
+            hex = hex + hexAlpha;
+
+      return hex;
+    }
+
+    function rgb2hex(colorval) {
+        var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        delete(parts[0]);
+        for (var i = 1; i <= 3; ++i) {
+            parts[i] = parseInt(parts[i]).toString(16);
+            if (parts[i].length == 1) parts[i] = '0' + parts[i];
+    }
+    color = '#' + parts.join('');
+
+    return color;
+}
+</script>
+</html>
