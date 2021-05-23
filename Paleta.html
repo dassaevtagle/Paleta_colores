@@ -121,6 +121,10 @@
         color: rgba(0, 0, 0, 0.87);
         background-color: #b7b7b7;
     }
+    
+    .pagination-color {
+        height: 30px;
+    }
 
     .btn{
         background-color: transparent;
@@ -131,7 +135,6 @@
     }
     i{
         font-size: 1.8rem;
-        color: #616161;
     }
     .status{
         font-size: 15px; 
@@ -154,8 +157,8 @@
         <div class="text-center my-4">
             <h1 class="my-5">Colores principales</h1>
             <div class="row text-center">
-                <div class="col-4">
-                    primary
+                <div class="col-4 text-sm">
+                    primary <small><i class="fas fa-question-circle fa-lg"></i></small>
                     <div class="color-rectangle rounded-sm" id="primary"></div>
                 </div>
                 <div class="col-4">
@@ -194,16 +197,12 @@
                     btn_success_border
                     <div class="color-rectangle rounded-sm" id="btn_success_border"></div>
                 </div>
-                <div class="col-4">
-                    btn_pagination
-                    <div class="color-rectangle rounded-sm" id="btn_pagination"></div>
-                </div>
             </div>
         </div>
         <div class="my-2 text-center">
-            <h1 class="my-5" id="home-cards">Home cards <i class="fas fa-question-circle"></i></h1>
+            <h1 class="my-5" id="home-cards">Home cards <i class="text-muted fas fa-question-circle"></i></h1>
             <div class="table-responsive">
-                <table class="table mt-4">
+                <table class="table mt-2">
                     <thead>
                     <tr>
                         <th scope="col">Home card 1</th>
@@ -330,8 +329,8 @@
             </div>
         </div>
         <div class="my-5 text-center">
-            <h1 class="my-4" id="text-status">Text status <i class="fas fa-question-circle"></i></h1>
-            <div class="row">
+            <h1 class="my-4" id="text-status">Text status <i class="text-muted fas fa-question-circle"></i></h1>
+            <div class="row mt-5">
                 <div class="col">
                     status_active
                     <div id="status_active"></div>
@@ -355,35 +354,35 @@
             </div>
         </div>
         <div class="my-5 text-center">
-            <h1 class="my-4" id="pagination_buttons">Pagination <i class="fas fa-question-circle"></i></h1>
-            <div class="col-10 offset-1">
+            <h1 class="my-4" id="pagination-buttons">Pagination <i class="text-muted fas fa-question-circle"></i></h1>
+            <div class="mt-5 col-10 offset-1">
                 <div class="pagination">
-                    <a class="disabled" ><i class="fas fa-chevron-left"></i></a>
+                    <a class="not_active disabled" ><i class="fas fa-chevron-left"></i></a>
                     <a class="active" >1</a>
-                    <a>2</a>
-                    <a>3</a>
-                    <a>4</a>
-                    <a>5</a>
-                    <a>6</a>
-                    <a><i class="fas fa-chevron-right"></i></a>
+                    <a class="not_active">2</a>
+                    <a class="not_active">3</a>
+                    <a class="not_active">4</a>
+                    <a class="not_active">5</a>
+                    <a class="not_active">6</a>
+                    <a class="not_active"><i class="fas fa-chevron-right"></i></a>
                   </div>
             </div>
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-4 offset-4 col-lg-3 offset-lg-0">
                     font_pagination
-                    <div class="color-rectangle rounded-sm" id="font_pagination"></div>
+                    <div class="color-rectangle pagination-color rounded-sm" id="font_pagination"></div>
                 </div>
                 <div class="col-4 offset-4 col-lg-3 offset-lg-0">
                     font_pagination_active
-                    <div class="color-rectangle rounded-sm" id="font_pagination_active"></div>
+                    <div class="color-rectangle pagination-color rounded-sm" id="font_pagination_active"></div>
                 </div>
                 <div class="col-4 offset-4 col-lg-3 offset-lg-0">
                     bg_pagination
-                    <div class="color-rectangle rounded-sm" id="bg_pagination"></div>
+                    <div class="color-rectangle pagination-color rounded-sm" id="bg_pagination"></div>
                 </div>
                 <div class="col-4 offset-4 col-lg-3 offset-lg-0">
                     bg_pagination_active
-                    <div class="color-rectangle rounded-sm" id="bg_pagination_active"></div>
+                    <div class="color-rectangle pagination-color rounded-sm" id="bg_pagination_active"></div>
                 </div>
             </div>
         </div>
@@ -525,9 +524,6 @@ const paleta = {
         btn_primary_border: '#236faa',
         btn_success_border: '#2aa8dd',
 
-        //PAGINACIÓN
-        btn_pagination: '#b7b7b7',
-
         //##### DASHBOARD TOP CARDS #####
         bg_home_card_1: '#f6931c',
         bg_home_card_1_avatar: '#f5881f',
@@ -592,8 +588,11 @@ const paleta = {
      * Tooltips de ayuda
      * 
     */
-   $('#home-cards').tooltip({title: "Cards que se muestran en el dashboard para listar cuántos trámites están en determinado proceso (Pediente, En proceso, Cancelado, Finalizado) "})
+    $("#primary").parent().tooltip({title: "Color principal. El header, textos principales, iconos tienen este color."});
+    $('#home-cards').tooltip({title: "Cards que se muestran en el dashboard para listar cuántos trámites están en determinado proceso (Pediente, En proceso, Cancelado, Finalizado) "})
     $('#text-status').tooltip({ title: "Texto del status del trámite"});
+    $("#pagination-buttons").tooltip({title: "Botones de paginación para la tabla principal de trámites."});
+
 
     /**
      * Iteración sobre objeto de la paleta de colores para asignar colores e inicializar ColorPicker sobre cada elemento html
@@ -635,9 +634,36 @@ const paleta = {
             });
         }
 
+        switch(claseColor){
+            case "font_pagination":
+                $('.pagination > .not_active').css('color', hex);
+                button.addEventListener("colorChange", function (event) {
+                    $('.pagination > .not_active').css('color', event.detail.color.hexa);
+                });
+                break;
+            
+            case "font_pagination_active":
+                $('.pagination > .active').css('color', hex);
+                button.addEventListener("colorChange", function (event) {
+                    $('.pagination > .active').css('color', event.detail.color.hexa);
+                });
+                break;
+            case "bg_pagination":
+                $('.pagination > .not_active').css('background-color', hex);
+                button.addEventListener("colorChange", function (event) {
+                    $('.pagination > .not_active').css('background-color', event.detail.color.hexa);
+                });
+                break;        
+            case "bg_pagination_active":
+                $('.pagination > .active').css('background-color', hex);
+                button.addEventListener("colorChange", function (event) {
+                    $('.pagination > .active').css('background-color', event.detail.color.hexa);
+                });
+                break;
+        }
         //button.addEventListener("colorChange", function (event) {
             // This will give you the color you selected
-          //  const color = event.detail.color.hexa;
+          //  const color = event.detail.color.hhexexa;
 
         //});
     } 
