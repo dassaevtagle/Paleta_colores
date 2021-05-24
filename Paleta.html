@@ -130,8 +130,6 @@
         background-color: transparent;
         color: #616161;
         border: 1.8px solid !important;
-        font-size: 0.8rem;
-        height: 80%;
     }
     i{
         font-size: 1.8rem;
@@ -145,9 +143,9 @@
 <body class="container mt-4">
     <div class="my-3">
         <div class="row mb-4">
-            <h1 class="col-5">Paleta de colores</h1>
-            <a class="btn btn-secondary col-2 offset-2" href="https://vuetifyjs.com/en/styles/colors/#material-colors" target="_blank">Ejemplo de colores</a>
-            <a class="btn btn-secondary col-2 ml-5" id="exportarJSON">Exportar JSON</a>
+            <h1 class="col-12 col-lg-6">Paleta de colores</h1>
+            <a class="btn btn-secondary col-10 offset-1 col-lg-2 offset-lg-1" href="https://vuetifyjs.com/en/styles/colors/#material-colors" target="_blank">Ejemplo de colores</a>
+            <a class="btn btn-secondary col-10 offset-1 col-lg-2 offset-lg-1" id="exportarJSON">Exportar JSON</a>
         </div>
         <div class="d-none" id="JSON-container">
             <pre id="JSON" style="font-size: 65%; color: #e83e8c;">
@@ -157,15 +155,15 @@
         <div class="text-center my-4">
             <h1 class="my-5">Colores principales</h1>
             <div class="row text-center">
-                <div class="col-4 text-sm">
-                    primary <small><i class="fas fa-question-circle fa-lg"></i></small>
+                <div class="col-10 offset-1 offset-lg-0 col-lg-4 text-sm">
+                    primary <i class="fas fa-question-circle fa-lg"></i>
                     <div class="color-rectangle rounded-sm" id="primary"></div>
                 </div>
-                <div class="col-4">
+                <div class="col-10 offset-1 offset-lg-0 col-lg-4">
                     secondary
                     <div class="color-rectangle rounded-sm" id="secondary"></div>
                 </div>
-                <div class="col-4">
+                <div class="col-10 offset-1 offset-lg-0 col-lg-4">
                     accent
                     <div class="color-rectangle rounded-sm" id="accent"></div>
                 </div>
@@ -174,11 +172,7 @@
         <div>
             <div class="row text-center mt-4">
                 <div class="col-4">
-                    bg_header
-                    <div class="color-rectangle rounded-sm" id="bg_header"></div>
-                </div>
-                <div class="col-4">
-                    bg_main
+                    bg_main <i class="fas fa-question-circle fa-lg"></i>
                     <div class="color-rectangle rounded-sm" id="bg_main"></div>
                 </div>
                 <div class="col-4">
@@ -330,25 +324,25 @@
         </div>
         <div class="my-5 text-center">
             <h1 class="my-4" id="text-status">Text status <i class="text-muted fas fa-question-circle"></i></h1>
-            <div class="row mt-5">
-                <div class="col">
+            <div class="row">
+                <div class="mt-4 col-10 offset-1 offset-lg-0 col-lg-3">
                     status_active
-                    <div id="status_active"></div>
+                    <div class="mb-4" id="status_active"></div>
                     <span class="status"> Pendiente </span>
                 </div>
-                <div class="col" >
+                <div class="mt-4 col-10 offset-1 offset-lg-0 col-lg-3" >
                     status_process
-                    <div id="status_process"></div>
+                    <div class="mb-4" id="status_process"></div>
                     <span class="status"> En proceso </span>
                 </div>
-                <div class="col" >
+                <div class="mt-4 col-10 offset-1 offset-lg-0 col-lg-3" >
                     status_canceled
-                    <div id="status_canceled"></div>
+                    <div class="mb-4" id="status_canceled"></div>
                     <span class="status"> Cancelado </span>
                 </div>
-                <div class="col" >
+                <div class="mt-4 col-10 offset-1 offset-lg-0 col-lg-3" >
                     status_finished
-                    <div id="status_finished"></div>
+                    <div class="mb-4" id="status_finished"></div>
                     <span class="status"> Terminado </span>
                 </div>
             </div>
@@ -516,7 +510,6 @@ const paleta = {
         secondary: '#757575',
         accent: '#29abe2',
 
-        bg_header: "#F48FB1", //?   
         bg_main: "#eee",
         bg_main_header: "#eee",
 
@@ -589,6 +582,7 @@ const paleta = {
      * 
     */
     $("#primary").parent().tooltip({title: "Color principal. El header, textos principales, iconos tienen este color."});
+    $("#bg_main").parent().tooltip({title: "Color del background del contenedor principal."});
     $('#home-cards').tooltip({title: "Cards que se muestran en el dashboard para listar cuántos trámites están en determinado proceso (Pediente, En proceso, Cancelado, Finalizado) "})
     $('#text-status').tooltip({ title: "Texto del status del trámite"});
     $("#pagination-buttons").tooltip({title: "Botones de paginación para la tabla principal de trámites."});
